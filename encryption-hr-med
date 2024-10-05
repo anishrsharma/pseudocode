@@ -1,0 +1,58 @@
+public static String encryption(String s) {
+    // Write your code here
+        
+        int len = s.length();
+        double root = Math.sqrt(len);
+        int lowerBound = (int)Math.floor(root);
+        int upperBound = (int)Math.ceil(root);
+        
+        int matrixSize = lowerBound*upperBound;
+        if(matrixSize < len){
+            lowerBound += 1;
+        }
+        
+        String[][] matrix = new String[lowerBound][upperBound];
+        
+        int counter = 0;
+        for(int i=0; i<lowerBound; i++){
+            for(int j=0; j<upperBound; j++){
+                
+                if(counter>len-1){
+                    matrix[i][j] = "";
+                    continue;  
+                }
+                
+                char tempChar = s.charAt(counter); 
+                matrix[i][j] = Character.toString(tempChar);
+                counter += 1;
+                 
+            }   
+        }
+        
+        String[][] transposedMatrix = new String[upperBound][lowerBound];
+        
+
+        for(int i=0; i<lowerBound; i++){
+            for(int j=0; j<upperBound; j++){
+                transposedMatrix[j][i] = matrix[i][j];
+                
+                // resp += transposedMatrix[j][i];
+            }   
+        }
+                
+        String resp = "";
+        
+       for(int i=0; i<upperBound; i++){
+            for(int j=0; j<lowerBound; j++){
+                
+                resp += transposedMatrix[i][j];
+                if( j == lowerBound-1 ){
+                    resp += " ";  
+                } 
+            }   
+        }
+                 
+        
+        return resp;
+
+    }
